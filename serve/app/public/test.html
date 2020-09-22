@@ -6,6 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>测试后端文档</title>
 	<script src='https://s1.pstatp.com/cdn/expire-1-M/axios/0.19.2/axios.js'></script>
+	<style>
+		#allproductions img {
+			margin: 10px;
+			width: 120px;
+		}
+	</style>
 </head>
 
 <body>
@@ -142,13 +148,38 @@ imgtitle          摄影图片的标题--用于后面搜索
 		async function allproductionbtnGo() {
 			var re = await axios.get("http://192.168.3.113:7001/allproduction")
 			console.log("所有摄影作品", re.data)
-
+			var allproductions = document.querySelector("#allproductions")
+			for (var i = 0; i < re.data.length; i++) {
+				var img6 = document.createElement("img")
+				img6.src = re.data[i].upimgsrc
+				allproductions.appendChild(img6)
+				img6.onclick = collectproduction(re.data[i].id)
+			}
 		}
 		var allproductionbtn = document.querySelector("#allproduction")
 		allproductionbtn.onclick = allproductionbtnGo
 
 
 	</script>
+
+	<hr>
+	<h1>点击图片可以收藏下面的作品</h1>
+	<div id="allproductions">
+
+	</div>
+	<script>
+		 function collectproduction(id){
+
+            return async function(){
+				var re = await axios.get("http://192.168.3.113:7001/collectionProduction",{params:{id}})
+		    	console.log("收藏结果", re.data)  
+			}
+		}
+
+
+	</script>
+
+
 
 
 
@@ -166,7 +197,18 @@ imgtitle          摄影图片的标题--用于后面搜索
 
 	</script>
 
+	<hr>
+	<h1>获取当前登录用户所有自己的图片</h1>
+	<button id="getSelfProductionBtn">获取</button>
+	<script>
+		async function getSelfProductionBtnGo() {
+			var re = await axios("http://192.168.3.113:7001/getSelfProduction")
+			console.log(re)
+		}
+		var getSelfProductionBtn = document.querySelector("#getSelfProductionBtn")
+		getSelfProductionBtn.onclick = getSelfProductionBtnGo
 
+	</script>
 </body>
 
 </html>

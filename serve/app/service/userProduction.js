@@ -15,6 +15,7 @@ class UserProductionImgService extends Service {
 
 
   async collectionProduction(infoobj){
+    console.log(infoobj,6666)
     var sql=`insert into collection (userid,imgid) values (${infoobj.userid},${infoobj.id}) `
     var re=await this.app.mysql.query(sql)
     return re
@@ -24,7 +25,7 @@ class UserProductionImgService extends Service {
   async getcollectionProduction(infoobj){
     
     var sql=`select * from collection where userid=${infoobj.userid}`
-    var arr1=await this.app.mysql.query(sql)//关联表查询结果:[{id:0,userid:12,imgid:46},{id:0,userid:12,imgid:46}]
+    var arr1=await this.app.mysql.query(sql)
     if(arr1.length==0){
       return []
     }
@@ -40,5 +41,14 @@ class UserProductionImgService extends Service {
 
     
   }
+
+
+  async getSelfProduction(infoobj){
+    var sql=`select * from upload where userid=${infoobj.userid}`
+    // console.log(sql,111111)
+    var arr1=await this.app.mysql.query(sql)
+    return arr1
+  }
+
 }
 module.exports = UserProductionImgService;
