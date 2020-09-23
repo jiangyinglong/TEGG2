@@ -36,6 +36,14 @@ class UserProductionController extends Controller {
     async productionImg() {
         this.ctx.body = await this.ctx.service.userProduction.productionImg()
     }
+    //图片 标题,分类,名字等等  关键字搜索
+    async keydords() {
+        var keydords=this.ctx.request.query.keydords
+        var sql=`select * from where description like "%${keydords}%" or imgtitle like "%${keydords}%" or imgname like "%${keydords}%" or imgtype like "%${keydords}%"`
+        this.ctx.body = await this.app.mysql.query(sql)
+    }
+
+
 
     //用户需要收藏某个摄影图片
     async collectionProduction() {

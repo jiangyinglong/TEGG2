@@ -37,6 +37,11 @@ module.exports = app => {
  router.get('/getallcomments', controller.comments.getallcomments);
 //对某个图片进行评论
 router.get('/setComments', controller.comments.setComments);
+
+
+//图片 标题,分类,名字等等  关键字搜索keydords
+router.get('/keydords', controller.userProduction.keydords);
+
 };
 /*
 1.验证码接口
@@ -241,7 +246,13 @@ img   新的头像图片文件
 
 
 
-
+//15.图片 标题,分类,名字等等  关键字搜索
+url:    /keydords
+请求方式:   get
+请求条件:用户不用登录也可以
+参数:  
+keydords   关键字
+返回数据示例:得到以后自己打印
 
 
 */

@@ -65,6 +65,7 @@ class UserController extends Controller {
         if (!ctx.session.userid) {
             this.ctx.body = { code: 4006, info: "本来就没有登录" }
         } else {
+            ctx.session.userid=null
             this.ctx.body = { code: 2008, info: "已经退出登录" }
         }
 
