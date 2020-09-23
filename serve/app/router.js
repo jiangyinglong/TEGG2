@@ -8,6 +8,8 @@ module.exports = app => {
   router.get('/userinfo', controller.user.userinfo);//用户信息
   router.get('/destroy', controller.user.destroy);//注销
   router.get('/username', controller.user.username);//修改昵称
+  router.post('/setUserImg', controller.user.setUserImg);//修改头像
+
   //验证码
   router.get("/verif", controller.user.verif)
   //注册
@@ -221,5 +223,25 @@ url:    /setComments
 imgid   图片的id  
 comtext  评论的内容
 返回数据示例:得到以后自己打印
+
+
+
+
+14. 修改头像
+url:    /setUserImg
+请求方式:   post
+请求条件:用户必须已经登录
+参数:  
+img   新的头像图片文件  
+返回数据示例:
+{ code: 4006, info: "未登录" }
+{code: 20010, info: "修改成功",imgurl:imgurl}   
+{code: 4009, info: "未传头像"}    
+
+
+
+
+
+
 
 */

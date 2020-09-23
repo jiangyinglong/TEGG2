@@ -88,6 +88,14 @@ class UserService extends Service {
       // return res;
     }
 
+    //修改头像
+    async setUserImg(infoObj){
+      var {img,userid}=infoObj
+      var sql = `UPDATE userinfo SET img='${img}' WHERE id=${userid}`;
+      var res = await this.app.mysql.query(sql);
+      return res
+    }
+
 }
 
 module.exports = UserService;
